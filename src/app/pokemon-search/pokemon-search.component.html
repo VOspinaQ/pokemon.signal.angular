@@ -1,0 +1,57 @@
+<header class="header">
+  <h1>Pokémon</h1>
+  <nav>
+    <ul>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="search" class="search-container">
+    <div class="centered-container">
+      <div class="info-container">
+        <p class="info-text">Ingrese el nombre o el número de un Pokémon</p>
+      </div>
+      <div class="p-inputgroup full-width">
+        <input 
+          pInputText 
+          id="pokemonName" 
+          type="text" 
+          #pokemonName 
+          (input)="updateName(pokemonName.value)" 
+          (keydown.enter)="loadPokemon()"
+          placeholder="Ejemplo: Pikachu"
+        />
+        <button 
+          pButton 
+          type="button" 
+          icon="pi pi-search" 
+          (click)="loadPokemon()"
+        >Buscar</button>
+      </div>
+      
+      <div class="info-container">
+        <p class="hint">Da click en Buscar</p>
+      </div>
+
+      <div *ngIf="loading()" class="loader-container">
+        <span class="pokemon"></span>
+      </div>
+      
+      <div *ngIf="animationArray().length === 2 && imagenActual()" class="pokemon-info">
+        <h1 class="linear-wipe">{{pokemonData().species.name}}</h1>
+        <img [src]="imagenActual()" alt="Imagen de {{pokemonData().species.name}}" class="shaking" />
+        <div class="details">
+          <p>Tipo: {{ pokemonData().types[0].type.name }}</p>
+          <p>Altura: {{ pokemonData().height }} dm</p>
+          <p>Peso: {{ pokemonData().weight }} hg</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Otras secciones como 'info', 'types', 'history' -->
+</main>
+
+<footer class="footer">
+ 
